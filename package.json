@@ -1,0 +1,22 @@
+{
+  "name": "webpack-playground",
+  "version": "1.0.0",
+  "description": "A repository that contains a full webpack setup to act as a playground",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YashdalfTheGray/webpack-playground.git"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "Yash Kulshrestha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YashdalfTheGray/webpack-playground/issues"
+  },
+  "homepage": "https://github.com/YashdalfTheGray/webpack-playground#readme"
+}
