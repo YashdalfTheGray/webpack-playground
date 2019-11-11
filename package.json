@@ -4,7 +4,11 @@
   "description": "A repository that contains a full webpack setup to act as a playground",
   "main": "dist/index.js",
   "scripts": {
-    "test": "ava"
+    "tslint": "tslint 'src/**/*.tsx' 'src/**/*.ts'",
+    "build": "webpack --mode=development",
+    "dev-build": "webpack-dev-server --hot --mode=development --color --progress",
+    "prod-build": "webpack --mode=production",
+    "start": "npm run dev-build"
   },
   "repository": {
     "type": "git",
@@ -19,17 +23,47 @@
     "url": "https://github.com/YashdalfTheGray/webpack-playground/issues"
   },
   "homepage": "https://github.com/YashdalfTheGray/webpack-playground#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "core-js": "^3.4.0",
     "dotenv": "^8.2.0",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
     "loader-utils": "^1.2.3",
+    "prettier": "^1.19.1",
+    "react-hot-loader": "^4.12.16",
     "regenerator-runtime": "^0.13.3",
     "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^4.1.0",
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-visualizer-plugin": "^0.1.11"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   }
 }
