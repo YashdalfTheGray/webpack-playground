@@ -1,6 +1,7 @@
 ### Project ###
 dist
 artifacts
+public/*bundle.js
 
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
 
@@ -127,9 +128,6 @@ typings/
 
 # nuxt.js build output
 .nuxt
-
-# react / gatsby
-public/
 
 # vuepress build output
 .vuepress/dist
