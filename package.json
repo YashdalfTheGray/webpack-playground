@@ -8,7 +8,8 @@
     "build": "webpack --mode=development",
     "dev-build": "webpack-dev-server --hot --mode=development --color --progress",
     "prod-build": "webpack --mode=production",
-    "start": "npm run dev-build"
+    "start": "npm run dev-build",
+    "autoprefixer-info": "autoprefixer --info"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,md}": [
+    "*.{js,jsx,ts,tsx,json,css,html,md}": [
       "prettier --write",
       "git add"
     ]
@@ -39,16 +40,23 @@
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
+    "autoprefixer": "^9.7.1",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "core-js": "^3.4.0",
+    "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
+    "extract-text-webpack-plugin": "^3.0.2",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
     "loader-utils": "^1.2.3",
+    "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
     "react-hot-loader": "^4.12.16",
     "regenerator-runtime": "^0.13.3",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
     "ts-loader": "^6.2.1",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
