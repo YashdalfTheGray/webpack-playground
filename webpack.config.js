@@ -3,17 +3,25 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 
 const { APP_NAME } = process.env;
 
-module.exports = {
-  entry: ['core-js/stable', 'regenerator-runtime', './src/index.tsx'],
+const isDev = mode => mode === 'development';
+const isProd = mode => mode === 'production';
+
+module.exports = (_, argv) => ({
+  entry: [
+    'core-js/stable',
+    'regenerator-runtime',
+    'react-hot-loader/patch',
+    './src/index.tsx'
+  ],
   output: {
     path: resolve(__dirname, './public'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   devServer: {
     contentBase: resolve(__dirname, './public'),
@@ -28,36 +36,43 @@ module.exports = {
         use: [{ loader: 'babel-loader' }, { loader: 'ts-loader' }]
       },
       {
-        test: /\.s?css$/,
+        test: /\.(sa|sc|c)ss$/,
         exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: { importLoaders: 2 }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: () =>
-                  argv.mode === 'production'
-                    ? [autoprefixer(), cssnano()]
-                    : [autoprefixer()]
-              }
-            },
-            'sass-loader'
-          ]
-        })
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev(argv.mode)
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 2 }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () =>
+                isProd(argv.mode)
+                  ? [autoprefixer(), cssnano()]
+                  : [autoprefixer()]
+            }
+          },
+          'sass-loader'
+        ]
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('index.css'),
+    new MiniCssExtractPlugin({
+      filename: isDev(argv.mode) ? '[name].css' : '[name].[hash].css',
+      chunkFilename: isDev(argv.mode) ? '[id].css' : '[id].[hash].css'
+    }),
     new CleanWebpackPlugin({
       verbose: true,
       cleanOnceBeforeBuildPatterns: [
+        'public/artifacts',
         'public/*.js',
         'public/*.js.map',
         'public/*.css'
@@ -67,7 +82,7 @@ module.exports = {
       APP_NAME: JSON.stringify(APP_NAME)
     })
   ].concat(
-    argv.mode === 'development'
+    isDev(argv.mode)
       ? [
           new Visualizer({
             filename: './artifacts/statistics.html'
@@ -81,4 +96,4 @@ module.exports = {
   stats: {
     colors: true
   }
-};
+});
