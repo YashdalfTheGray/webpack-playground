@@ -1,7 +1,8 @@
 ### Project ###
 dist
 artifacts
-public/*bundle.js
+public/*.js*
+public/*.css*
 
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
 

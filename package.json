@@ -9,7 +9,8 @@
     "dev-build": "webpack-dev-server --hot --mode=development --color --progress",
     "prod-build": "webpack --mode=production",
     "start": "npm run dev-build",
-    "autoprefixer-info": "autoprefixer --info"
+    "autoprefixer-info": "autoprefixer --info",
+    "show-stats": "npx open ./public/artifacts/statistics.html"
   },
   "repository": {
     "type": "git",

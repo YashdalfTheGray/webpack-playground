@@ -66,30 +66,26 @@ module.exports = (_, argv) => ({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: isDev(argv.mode) ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDev(argv.mode) ? '[id].css' : '[id].[hash].css'
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     }),
     new CleanWebpackPlugin({
-      verbose: true,
+      verbose: isDev(argv.mode),
       cleanOnceBeforeBuildPatterns: [
-        'public/artifacts',
-        'public/*.js',
-        'public/*.js.map',
-        'public/*.css'
+        'artifacts',
+        '*.js',
+        '*.js.map',
+        '*.css',
+        '*.css.map'
       ]
     }),
     new webpack.DefinePlugin({
       APP_NAME: JSON.stringify(APP_NAME)
+    }),
+    new Visualizer({
+      filename: './artifacts/statistics.html'
     })
-  ].concat(
-    isDev(argv.mode)
-      ? [
-          new Visualizer({
-            filename: './artifacts/statistics.html'
-          })
-        ]
-      : []
-  ),
+  ].concat(isDev(argv.mode) ? [] : []),
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss']
   },
