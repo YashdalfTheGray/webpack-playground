@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-// import './TextPicker.scss';
+import './TextPicker.scss';
 
 interface ITextPickerProps {
   text: string;

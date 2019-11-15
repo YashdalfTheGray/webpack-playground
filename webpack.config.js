@@ -34,13 +34,44 @@ module.exports = (_, argv) => ({
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [{ loader: 'babel-loader' }, { loader: 'ts-loader' }]
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev(argv.mode)
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 2 }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () =>
+                isProd(argv.mode)
+                  ? [autoprefixer(), cssnano()]
+                  : [autoprefixer()]
+            }
+          },
+          'sass-loader'
+        ]
       }
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
     new CleanWebpackPlugin({
       verbose: isDev(argv.mode),
-      cleanOnceBeforeBuildPatterns: ['*.js', '*.js.map']
+      cleanOnceBeforeBuildPatterns: ['*.js', '*.js.map', '*.css', '*.css.map']
     }),
     new webpack.DefinePlugin({
       APP_NAME: JSON.stringify(APP_NAME)

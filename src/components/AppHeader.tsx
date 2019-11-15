@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-// import './AppHeader.scss';
+import './AppHeader.scss';
 
 interface IAppHeaderProps {
   name: string;
