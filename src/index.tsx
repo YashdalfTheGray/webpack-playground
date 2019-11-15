@@ -6,7 +6,7 @@ import CSSBaseline from './components/CSSBaseline';
 
 const AppFrame = () => (
   <CSSBaseline>
-    <App name="Test App" />
+    <App name={APP_NAME} />
   </CSSBaseline>
 );
 

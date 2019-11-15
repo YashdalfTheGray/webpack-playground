@@ -12,7 +12,7 @@ const { APP_NAME } = process.env;
 const isDev = mode => mode === 'development';
 const isProd = mode => mode === 'production';
 
-module.exports = {
+module.exports = (_, argv) => ({
   entry: [
     'core-js/stable',
     'regenerator-runtime',
@@ -23,6 +23,7 @@ module.exports = {
     path: resolve(__dirname, './public'),
     filename: '[name].js'
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -32,10 +33,19 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new CleanWebpackPlugin({
+      verbose: isDev(argv.mode),
+      cleanOnceBeforeBuildPatterns: ['*.js', '*.js.map']
+    }),
+    new webpack.DefinePlugin({
+      APP_NAME: JSON.stringify(APP_NAME)
+    })
+  ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss']
   },
   stats: {
     colors: true
   }
-};
+});
