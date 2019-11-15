@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import './TextOnColorDisplay.scss';
+// import './TextOnColorDisplay.scss';
 
 interface ITextOnColorDisplayProps {
   text: string;
