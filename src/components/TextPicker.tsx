@@ -9,17 +9,40 @@ interface ITextPickerProps {
   onColorChange: (newColor: string) => void;
 }
 
-export default class TextPicker extends React.Component<ITextPickerProps> {
+interface ITextPickerState {
+  colorValue: string;
+}
+
+export default class TextPicker extends React.Component<
+  ITextPickerProps,
+  ITextPickerState
+> {
+  constructor(props: ITextPickerProps) {
+    super(props);
+
+    this.state = {
+      colorValue: props.color
+    };
+  }
+
   public handleTextChange = (event: React.FocusEvent<HTMLInputElement>) => {
     this.props.onTextChange(event.currentTarget.value);
   };
 
   public handleColorChange = (event: React.FocusEvent<HTMLInputElement>) => {
-    this.props.onColorChange(event.currentTarget.value);
+    this.setState({ colorValue: event.currentTarget.value });
+  };
+
+  public handleColorBlur = () => {
+    const { colorValue } = this.state;
+    if (this.validateColorString(colorValue)) {
+      this.props.onColorChange(colorValue);
+    }
   };
 
   public render() {
-    const { text, color } = this.props;
+    const { text } = this.props;
+    const { colorValue } = this.state;
 
     return (
       <div className="TextPicker">
@@ -29,8 +52,9 @@ export default class TextPicker extends React.Component<ITextPickerProps> {
             id="text-entry-field"
             type="text"
             value={text}
-            onChange={this.handleTextChange}
             placeholder="Enter some text"
+            maxLength={20}
+            onChange={this.handleTextChange}
           />
         </div>
         <div className="field">
@@ -38,12 +62,16 @@ export default class TextPicker extends React.Component<ITextPickerProps> {
           <input
             id="text-color-field"
             type="text"
-            value={color}
-            onChange={this.handleColorChange}
+            value={colorValue}
             placeholder="Enter a color"
+            maxLength={7}
+            onChange={this.handleColorChange}
+            onBlur={this.handleColorBlur}
           />
         </div>
       </div>
     );
   }
+
+  private validateColorString = (cs: string) => /^#[A-Fa-f0-9]{6}$/.test(cs);
 }
