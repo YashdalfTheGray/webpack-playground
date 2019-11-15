@@ -24,6 +24,10 @@ module.exports = (_, argv) => ({
     filename: '[name].js'
   },
   devtool: 'source-map',
+  devServer: {
+    contentBase: resolve(__dirname, './public'),
+    host: '0.0.0.0'
+  },
   module: {
     rules: [
       {
