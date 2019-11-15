@@ -71,10 +71,19 @@ module.exports = (_, argv) => ({
     }),
     new CleanWebpackPlugin({
       verbose: isDev(argv.mode),
-      cleanOnceBeforeBuildPatterns: ['*.js', '*.js.map', '*.css', '*.css.map']
+      cleanOnceBeforeBuildPatterns: [
+        'artifacts',
+        '*.js',
+        '*.js.map',
+        '*.css',
+        '*.css.map'
+      ]
     }),
     new webpack.DefinePlugin({
       APP_NAME: JSON.stringify(APP_NAME)
+    }),
+    new Visualizer({
+      filename: './artifacts/statistics.html'
     })
   ],
   resolve: {
