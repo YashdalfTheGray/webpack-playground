@@ -10,7 +10,8 @@
     "prod-build": "webpack --mode=production",
     "start": "npm run dev-build",
     "autoprefixer-info": "autoprefixer --info",
-    "show-stats": "npx open ./public/artifacts/statistics.html"
+    "show-stats": "npx open ./public/artifacts/statistics.html",
+    "prettier": "prettier --write src tsconfig.json tslint.json webpack.config.js README.md"
   },
   "repository": {
     "type": "git",
