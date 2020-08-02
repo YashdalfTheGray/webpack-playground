@@ -21,19 +21,19 @@ class App extends React.Component<IAppProps, IAppState> {
 
     this.state = {
       displayText: 'Sample text',
-      displayColor: '#1976D2'
+      displayColor: '#1976D2',
     };
   }
 
   public handleTextChange = (newText: string) => {
     this.setState({
-      displayText: newText
+      displayText: newText,
     });
   };
 
   public handleColorChange = (newColor: string) => {
     this.setState({
-      displayColor: newColor
+      displayColor: newColor,
     });
   };
 

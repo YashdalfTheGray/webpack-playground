@@ -21,7 +21,7 @@ export default class TextPicker extends React.Component<
     super(props);
 
     this.state = {
-      colorValue: props.color
+      colorValue: props.color,
     };
   }
 

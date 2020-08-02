@@ -19,7 +19,7 @@ export default class TextOnColorDisplay extends React.Component<
     super(props);
 
     this.state = {
-      colors: this.generate4BitGrayscale()
+      colors: this.generate4BitGrayscale(),
     };
   }
 
@@ -35,7 +35,7 @@ export default class TextOnColorDisplay extends React.Component<
             key={c}
             style={{
               backgroundColor: c,
-              border: `1px solid ${arr[arr.length - 1 - i]}`
+              border: `1px solid ${arr[arr.length - 1 - i]}`,
             }}>
             <span style={{ color }}>{text}</span>
           </div>

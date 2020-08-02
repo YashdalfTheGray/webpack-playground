@@ -9,31 +9,31 @@ const cssnano = require('cssnano');
 
 const { APP_NAME } = process.env;
 
-const isDev = mode => mode === 'development';
-const isProd = mode => mode === 'production';
+const isDev = (mode) => mode === 'development';
+const isProd = (mode) => mode === 'production';
 
 module.exports = (_, argv) => ({
   entry: [
     'core-js/stable',
     'regenerator-runtime',
     'react-hot-loader/patch',
-    './src/index.tsx'
+    './src/index.tsx',
   ],
   output: {
     path: resolve(__dirname, './public'),
-    filename: '[name].js'
+    filename: '[name].js',
   },
   devtool: 'source-map',
   devServer: {
     contentBase: resolve(__dirname, './public'),
-    host: '0.0.0.0'
+    host: '0.0.0.0',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: [{ loader: 'babel-loader' }, { loader: 'ts-loader' }]
+        use: [{ loader: 'babel-loader' }, { loader: 'ts-loader' }],
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -42,12 +42,12 @@ module.exports = (_, argv) => ({
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: isDev(argv.mode)
-            }
+              hmr: isDev(argv.mode),
+            },
           },
           {
             loader: 'css-loader',
-            options: { importLoaders: 2 }
+            options: { importLoaders: 2 },
           },
           {
             loader: 'postcss-loader',
@@ -56,18 +56,18 @@ module.exports = (_, argv) => ({
               plugins: () =>
                 isProd(argv.mode)
                   ? [autoprefixer(), cssnano()]
-                  : [autoprefixer()]
-            }
+                  : [autoprefixer()],
+            },
           },
-          'sass-loader'
-        ]
-      }
-    ]
+          'sass-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css'
+      chunkFilename: '[id].css',
     }),
     new CleanWebpackPlugin({
       verbose: isDev(argv.mode),
@@ -76,20 +76,20 @@ module.exports = (_, argv) => ({
         '*.js',
         '*.js.map',
         '*.css',
-        '*.css.map'
-      ]
+        '*.css.map',
+      ],
     }),
     new webpack.DefinePlugin({
-      APP_NAME: JSON.stringify(APP_NAME)
+      APP_NAME: JSON.stringify(APP_NAME),
     }),
     new Visualizer({
-      filename: './artifacts/statistics.html'
-    })
+      filename: './artifacts/statistics.html',
+    }),
   ],
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss'],
   },
   stats: {
-    colors: true
-  }
+    colors: true,
+  },
 });
