@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const { resolve } = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -51,11 +52,12 @@ module.exports = (_, argv) => ({
           {
             loader: 'postcss-loader',
             options: {
-              ident: 'postcss',
-              plugins: () =>
-                isProd(argv.mode)
-                  ? [autoprefixer(), cssnano()]
-                  : [autoprefixer()],
+              postcssOptions: {
+                ident: 'postcss',
+                plugins: [autoprefixer()].concat(
+                  isProd(argv.mode) ? [cssnano()] : []
+                ),
+              },
             },
           },
           'sass-loader',
