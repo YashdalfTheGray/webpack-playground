@@ -2,7 +2,6 @@ require('dotenv').config();
 const { resolve } = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const Visualizer = require('webpack-visualizer-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
@@ -81,9 +80,6 @@ module.exports = (_, argv) => ({
     }),
     new webpack.DefinePlugin({
       APP_NAME: JSON.stringify(APP_NAME),
-    }),
-    new Visualizer({
-      filename: './artifacts/statistics.html',
     }),
   ],
   resolve: {
