@@ -1,5 +1,3 @@
-import { hot } from 'react-hot-loader/root';
-
 import * as React from 'react';
 
 import AppHeader from './AppHeader';
@@ -15,7 +13,7 @@ interface IAppState {
   displayColor: string;
 }
 
-class App extends React.Component<IAppProps, IAppState> {
+export default class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
     super(props);
 
@@ -55,5 +53,3 @@ class App extends React.Component<IAppProps, IAppState> {
     );
   }
 }
-
-export default hot(App);

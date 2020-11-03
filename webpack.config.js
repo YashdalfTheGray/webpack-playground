@@ -6,6 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const { APP_NAME } = process.env;
 
@@ -13,12 +14,7 @@ const isDev = (mode) => mode === 'development';
 const isProd = (mode) => mode === 'production';
 
 module.exports = (_, argv) => ({
-  entry: [
-    'core-js/stable',
-    'regenerator-runtime',
-    'react-hot-loader/patch',
-    './src/index.tsx',
-  ],
+  entry: ['core-js/stable', 'regenerator-runtime', './src/index.tsx'],
   output: {
     path: resolve(__dirname, './public'),
     filename: '[name].js',
@@ -83,6 +79,7 @@ module.exports = (_, argv) => ({
     new webpack.DefinePlugin({
       APP_NAME: JSON.stringify(APP_NAME),
     }),
+    new ReactRefreshWebpackPlugin(),
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss'],
