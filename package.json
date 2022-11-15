@@ -45,7 +45,7 @@
     "autoprefixer": "^10.4.13",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^4.0.0",
-    "core-js": "^3.6.5",
+    "core-js": "^3.26.1",
     "css-loader": "^5.2.7",
     "cssnano": "^5.1.13",
     "dotenv": "^8.2.0",
