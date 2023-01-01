@@ -56,7 +56,7 @@
     "postcss": "^8.4.20",
     "postcss-loader": "^4.3.0",
     "prettier": "^2.8.1",
-    "react-refresh": "^0.9.0",
+    "react-refresh": "^0.14.0",
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.56.1",
     "sass-loader": "^10.0.4",
