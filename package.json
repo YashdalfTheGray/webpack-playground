@@ -58,7 +58,7 @@
     "prettier": "^2.8.4",
     "react-refresh": "^0.14.0",
     "regenerator-runtime": "^0.13.11",
-    "sass": "^1.61.0",
+    "sass": "^1.62.1",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.2",
     "ts-loader": "^9.4.2",
