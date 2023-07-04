@@ -47,7 +47,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.30.2",
     "css-loader": "^6.8.1",
-    "cssnano": "^6.0.0",
+    "cssnano": "^6.0.1",
     "dotenv": "^16.3.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
